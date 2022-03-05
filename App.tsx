@@ -1,20 +1,34 @@
+import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useFonts } from 'expo-font';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ThemeProvider } from "styled-components";
+import { defaultTheme } from './src/themes';
+import { Greeting } from './src/screens'
+
+const Stack = createNativeStackNavigator()
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    Epilogue: require('./assets/fonts/epilogue.ttf'),
+    Rajdhani: require('./assets/fonts/rajdhani.ttf')
+  });
+
+  if (!fontsLoaded) {
+    return (
+      <View style={{backgroundColor: 'black'}}></View>
+    )
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+    <ThemeProvider theme={defaultTheme}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='Greeting' screenOptions={{headerShown: false}}>
+          <Stack.Screen name='Greeting' component={Greeting}/>
+        </Stack.Navigator>
+      </NavigationContainer>
       <StatusBar style="auto" />
-    </View>
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
