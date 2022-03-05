@@ -3,7 +3,6 @@ import styled from "styled-components/native";
 interface Props {
   color?: 'main' | 'contrast1' | 'contrast2',
   size?: string,
-  bg?: 'main' | 'contrast1' | 'contrast2'
 }
 
 const Title = styled.Text<Props>`
