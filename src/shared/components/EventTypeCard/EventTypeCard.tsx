@@ -1,6 +1,7 @@
 import { TouchableOpacityProps, View } from 'react-native'
 import { ComponentRootContainer, EventCountText, Title } from './EventTypeCard.style'
-import { Highlight, SvgIcons } from '../'
+import Highlight from '../Highlight/Highlight'
+import SvgIcons from '../SvgIcons/SvgIcons'
 
 interface EventTypeCardProps extends TouchableOpacityProps {
   selected?: boolean,
