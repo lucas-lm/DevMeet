@@ -6,6 +6,7 @@ interface IconContainerProps {
 
 interface TextContainerProps {
   textSize?: string
+  textWeight?: 'normal' | 'bold'
 }
 
 const mapIconColorOptions = (theme: DefaultTheme, opt?: string) => {
@@ -34,7 +35,7 @@ export const IconContainer = styled.View<IconContainerProps>`
 
 export const TextContainer = styled.Text<TextContainerProps>`
   font-family: 'Epilogue';
-  font-weight: normal;
+  font-weight: ${({ textWeight='normal' }) => textWeight};
   font-size: ${( { textSize='16px' } ) => textSize};
   color: ${({ theme }) => theme.palette.primary.contrast1};
 `
