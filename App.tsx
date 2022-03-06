@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme as RNNavigationDefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ThemeProvider } from "styled-components";
 import { defaultTheme } from './src/themes';
@@ -21,14 +21,24 @@ export default function App() {
     )
   }
 
+  const RNNavTheme = {
+    ...RNNavigationDefaultTheme,
+    colors: {
+      ...RNNavigationDefaultTheme.colors,
+      background: defaultTheme.palette.gray.background,
+      text: defaultTheme.palette.primary.contrast1,
+      primary: defaultTheme.palette.primary.main,
+    },
+  };
+
   return (
     <ThemeProvider theme={defaultTheme}>
-      <NavigationContainer>
+      <NavigationContainer theme={RNNavTheme}>
         <Stack.Navigator initialRouteName='Greeting' screenOptions={{headerShown: false}}>
           <Stack.Screen name='Greeting' component={Greeting}/>
         </Stack.Navigator>
       </NavigationContainer>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </ThemeProvider>
   );
 }
