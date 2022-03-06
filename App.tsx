@@ -5,7 +5,7 @@ import { NavigationContainer, DefaultTheme as RNNavigationDefaultTheme } from '@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ThemeProvider } from "styled-components";
 import { defaultTheme } from './src/themes';
-import { Greeting } from './src/screens'
+import { Greeting, ChoseEventType, AvailableEvents, EventPage } from './src/screens'
 
 const Stack = createNativeStackNavigator()
 
@@ -36,6 +36,9 @@ export default function App() {
       <NavigationContainer theme={RNNavTheme}>
         <Stack.Navigator initialRouteName='Greeting' screenOptions={{headerShown: false}}>
           <Stack.Screen name='Greeting' component={Greeting}/>
+          <Stack.Screen name='ChoseEventType' component={ChoseEventType}/>
+          <Stack.Screen name='AvailableEvents' component={AvailableEvents}/>
+          <Stack.Screen name='EventPage' component={EventPage}/>
         </Stack.Navigator>
       </NavigationContainer>
       <StatusBar style="light" />

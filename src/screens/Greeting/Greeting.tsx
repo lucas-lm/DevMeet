@@ -17,7 +17,7 @@ const Greeting = ({ navigation }: GreetingPageNavProps) => {
         </Paragraph>
       </TextContainer>
       <Person height='45%' style={{maxHeight: 300, marginVertical: 8}}/>
-      <TextIconButton iconBackgroundColor='main' onPress={() => navigation.navigate('')}>
+      <TextIconButton iconBackgroundColor='main' onPress={() => navigation.navigate('ChoseEventType')}>
         <ArrowOrange width='40px' height='40px' />
       </TextIconButton>
     </GreetingRootContainer>
