@@ -43,9 +43,11 @@ interface SvgIconsProps extends SvgProps {
   icon: string
 }
 
-const SvgIcons: React.FC<SvgIconsProps> = ({ color='main', icon, ...rest }) => {
+const SvgIcon: React.FC<SvgIconsProps> = ({ color='main', icon, ...rest }) => {
   const colorIcon = color === 'main' ? OrangeIcons : WhiteIcons
   switch (icon.toLowerCase()) {
+    case 'arrow':
+      return <colorIcon.Arrow {...rest} />
     case 'programing':
       return <colorIcon.ProgramingTerminal {...rest} />
     case 'laptop':
@@ -66,4 +68,4 @@ const SvgIcons: React.FC<SvgIconsProps> = ({ color='main', icon, ...rest }) => {
   }
 }
 
-export default SvgIcons
+export default SvgIcon

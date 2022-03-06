@@ -1,7 +1,7 @@
 import { TouchableOpacityProps, View } from 'react-native'
 import { ComponentRootContainer, EventCountText, Title } from './EventTypeCard.style'
 import Highlight from '../Highlight/Highlight'
-import SvgIcons from '../SvgIcons/SvgIcons'
+import SvgIcon from '../SvgIcon/SvgIcon'
 
 interface EventTypeCardProps extends TouchableOpacityProps {
   selected?: boolean,
@@ -15,7 +15,7 @@ const EventTypeCard: React.FC<EventTypeCardProps> = ({selected, icon, text, even
   return (
     <ComponentRootContainer {...rest} active={selected}>
       <View>
-        <SvgIcons icon={icon} color={selected ? 'contrast' : 'main'} height='40px'/>
+        <SvgIcon icon={icon} color={selected ? 'contrast' : 'main'} height='40px'/>
         <Title active={selected} style={{marginTop: 8}}>{text}</Title>
       </View>
       {eventCount &&

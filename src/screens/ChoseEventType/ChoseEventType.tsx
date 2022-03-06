@@ -2,9 +2,8 @@ import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../@types/navigation";
 import { useEffect, useState } from "react";
 import { CardsContainer, PageRootContainer, TextContainer } from "./ChoseEventType.style";
-import { Paragraph, TextIconButton, Title, EventTypeCard } from "../../shared/components";
+import { Paragraph, TextIconButton, Title, EventTypeCard, SvgIcon } from "../../shared/components";
 import { ApiClient } from "../../shared/services";
-import ArrowWhite from '../../../assets/svg/Arrow-White.svg';
 
 type ChoseEventTypePageProps = NativeStackScreenProps<RootStackParamList, 'ChoseEventType'>;
 
@@ -58,7 +57,7 @@ const ChoseEventType = ({ navigation }: ChoseEventTypePageProps) => {
         style={{alignSelf: 'flex-end', marginTop: 24}}
         onPress={() => navigation.navigate('AvailableEvents', { categoryId: selectedCard.id })}
         >
-        <ArrowWhite width='40px' height='40px' />
+        <SvgIcon width='40px' height='40px' icon="arrow" color="contrast"/>
       </TextIconButton>
       )}
     </PageRootContainer>
