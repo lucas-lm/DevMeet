@@ -1,3 +1,3 @@
-import Greeting from './Greeting'
+import Greeting from './Greeting/Greeting'
 
 export { Greeting }
