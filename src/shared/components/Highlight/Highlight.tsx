@@ -6,10 +6,10 @@ interface Props {
   bg?: 'main' | 'contrast1' | 'contrast2'
 }
 
-const Title = styled.Text<Props>`
+const Highlight = styled.Text<Props>`
   font-weight: ${({ weight='bold' }) => weight};
   color: ${({ theme, color='main' }) => theme.palette.primary[color]};
   background-color: ${({ theme, bg }) => bg ? theme.palette.primary[bg] : 'transparent'};
 `
 
-export default Title
+export default Highlight
