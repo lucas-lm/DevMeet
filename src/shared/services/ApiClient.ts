@@ -17,4 +17,10 @@ export default class ApiClient {
     return categoryId ? events.filter(evt => evt.tipoId === categoryId) : events
   }
 
+  static async getEventById(eventId: string) {
+    const response = await ApiClient.client.get<IApiResponseType>('/events.json')
+    const { events } = response.data
+    return events.find(evt => evt.id === eventId)
+  }
+
 }
