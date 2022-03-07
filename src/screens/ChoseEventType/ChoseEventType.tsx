@@ -5,6 +5,7 @@ import { CardsContainer, PageRootContainer, TextContainer } from "./ChoseEventTy
 import { Paragraph, TextIconButton, Title, EventTypeCard, SvgIcon } from "../../shared/components";
 import { ApiClient } from "../../shared/services";
 
+
 type ChoseEventTypePageProps = NativeStackScreenProps<RootStackParamList, 'ChoseEventType'>;
 
 const ChoseEventType = ({ navigation }: ChoseEventTypePageProps) => {
