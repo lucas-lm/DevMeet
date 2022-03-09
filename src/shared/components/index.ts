@@ -7,5 +7,6 @@ import SvgIcon from './SvgIcon/SvgIcon'
 import Datetime from "./Datetime/Datetime";
 import ClockTimeUnit from "./ClockTimeUnit/ClockTimeUnit";
 import Timer from "./Timer/Timer";
+import ProgressBar from "./ProgressBar/ProgressBar";
 
-export { Title, Highlight, Paragraph, TextIconButton, EventTypeCard, SvgIcon, Datetime, ClockTimeUnit, Timer }
+export { Title, Highlight, Paragraph, TextIconButton, EventTypeCard, SvgIcon, Datetime, ClockTimeUnit, Timer, ProgressBar }
