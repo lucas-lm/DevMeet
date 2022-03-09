@@ -5,5 +5,6 @@ import TextIconButton from './TextIconButton/TextIconButton'
 import EventTypeCard from './EventTypeCard/EventTypeCard'
 import SvgIcon from './SvgIcon/SvgIcon'
 import Datetime from "./Datetime/Datetime";
+import ClockTimeUnit from "./ClockTimeUnit/ClockTimeUnit";
 
-export { Title, Highlight, Paragraph, TextIconButton, EventTypeCard, SvgIcon, Datetime }
+export { Title, Highlight, Paragraph, TextIconButton, EventTypeCard, SvgIcon, Datetime, ClockTimeUnit }
