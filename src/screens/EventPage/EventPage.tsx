@@ -2,15 +2,23 @@ import { useEffect, useState } from 'react';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RootStackParamList } from "../../@types/navigation";
 import { DateHeaderBox, EventPageRootContainer, HeaderContainer, LinkActionBar, ScrollableContentContainer, SectionContainer } from "./EventPage.style";
-import { Datetime, Highlight, Paragraph, SvgIcon, TextIconButton, Title } from "../../shared/components";
+import { Datetime, Highlight, Paragraph, SvgIcon, TextIconButton, Timer, Title, ProgressBar } from "../../shared/components";
 import { ApiClient } from "../../shared/services";
 import { View } from 'react-native';
+import { useTheme } from 'styled-components';
 
 type EventPageProps = NativeStackScreenProps<RootStackParamList, 'EventPage'>
 
 const EventPage = ({ navigation, route }: EventPageProps) => {
   const { eventId } = route.params
+  const theme = useTheme()
   const [event, setEvent] = useState<IEvent>()
+  const [progress, setProgress] = useState(0)
+
+  const handleSecondsChange = (secondsLeft: number) => {
+    const p = Math.max(1 - secondsLeft / 6000, 0.1)
+    setProgress(p)
+  }
 
   useEffect(() => {
     ApiClient
@@ -61,13 +69,19 @@ const EventPage = ({ navigation, route }: EventPageProps) => {
         </SectionContainer>
 
         <SectionContainer>
-          <Title size='16px'>Tempo até o evento</Title>
-          <Paragraph>Countdown vai aqui</Paragraph>
-          <Paragraph>Countdown vai aqui</Paragraph>
+          <Title size='20px' style={{marginVertical: 24}}>Tempo até o evento</Title>
+          <Timer to={event?.dataInicio as string} size={32} onSecondsChange={handleSecondsChange}>
+            <Title>O evento já está rolando! 🎉🎉🎉</Title>
+          </Timer>
+          <ProgressBar
+            width={300}
+            progress={progress}
+            barColor={progress < 0.9 ? theme.palette.primary.main : theme.palette.semantic.success}
+            style={{alignSelf: 'center', marginVertical: 16}}
+            />
         </SectionContainer>
       </ScrollableContentContainer>
     </EventPageRootContainer>
   )
 }
-
 export default EventPage
