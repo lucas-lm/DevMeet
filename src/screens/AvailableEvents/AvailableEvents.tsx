@@ -47,7 +47,6 @@ const AvailableEvents = ({ navigation, route }: AvailableEventsPageProps) => {
                 datetime={evt.dataInicio}
                 outputFormat="DD/MMM"
                 style={{textTransform: 'uppercase'}}
-                weight='bold'
               /> - <Datetime datetime={evt.dataInicio} outputFormat="HH:mm"/>
             </Text>
             <EventCardTitle>{evt.titulo}</EventCardTitle>
