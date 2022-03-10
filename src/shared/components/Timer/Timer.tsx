@@ -9,7 +9,7 @@ interface TimerComponentProps {
   size?: number,
   width?: string,
   direction?: 'row' | 'column',
-  onTimesUp?: () => void,
+  onTimesUp?: (passedTime: number) => void,
   onMinutesChange?: (reaminingTime: number) => void
   onSecondsChange?: (reaminingTime: number) => void
 }
@@ -25,6 +25,7 @@ const Timer: React.FC<TimerComponentProps> = ({
 }) => {
   const date = dtFormat ? moment(to, dtFormat) : moment.utc(to)
   const [now, setNow] = useState<Moment>(moment())
+  const [timesUp, setTimesUp] = useState(false)
   const timeFromNow = (u: 'days' | 'hours' | 'minutes' | 'seconds') => date.diff(now, u)
 
   const secondsLeft = timeFromNow('seconds')
@@ -39,11 +40,18 @@ const Timer: React.FC<TimerComponentProps> = ({
       onMinutesChange && onMinutesChange(secondsLeft)
     }
 
+    if (secondsLeft <= 0 && !timesUp) setTimesUp(true)
+
     return () => clearTimeout(timeoutId)
   }, [now])
 
-  if (timeFromNow('seconds') <= 0) {
-    onTimesUp && onTimesUp()
+  useEffect(() => {
+    if (timesUp) {
+      onTimesUp && onTimesUp(-secondsLeft)
+    }
+  }, [timesUp])
+
+  if (timesUp) {
     return <>{children}</>
   }
 
