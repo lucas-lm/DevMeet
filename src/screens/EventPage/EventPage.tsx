@@ -11,6 +11,11 @@ import { useTheme } from 'styled-components';
 
 type EventPageProps = NativeStackScreenProps<RootStackParamList, 'EventPage'>
 
+const PROGRESSBAR_START_TIME = 600 // in seconds
+const PROGRESSBAR_MIN_VAL = 0.1
+const ALERT_MODE_LIFETIME = 30 // in seconds
+const ALERT_MODE_VIBRATION_PATTERN = [0, 500, 100, 500, 1000]
+
 const EventPage = ({ navigation, route }: EventPageProps) => {
   const { eventId } = route.params
   const theme = useTheme()
@@ -20,7 +25,7 @@ const EventPage = ({ navigation, route }: EventPageProps) => {
   const [isUnderAlert, setIsUnderAlert] = useState(false)
 
   const updateProgress = (secondsLeft: number) => {
-    setProgress(Math.max(1 - secondsLeft / 6000, 0.1))
+    setProgress(Math.max(1 - secondsLeft / PROGRESSBAR_START_TIME, PROGRESSBAR_MIN_VAL))
   }
 
   // dismiss the alert + clears the timeout that sets the Alert state time limit
@@ -31,7 +36,7 @@ const EventPage = ({ navigation, route }: EventPageProps) => {
 
   const handleTimerTimesUp = () => {
     setIsUnderAlert(true)
-    const timeoutId = setTimeout(() => setIsUnderAlert(false), 10*1000)
+    const timeoutId = setTimeout(() => setIsUnderAlert(false), ALERT_MODE_LIFETIME*1000)
     Alert.alert(
       'O evento já começou!',
       'O seu evento já está rolando! Não fique de fora, siga para a página do evento',
@@ -56,7 +61,7 @@ const EventPage = ({ navigation, route }: EventPageProps) => {
 
   useEffect(() => {
     if (!isUnderAlert) Vibration.cancel()
-    if (isUnderAlert && isNotificationsEnabled) Vibration.vibrate([0, 500, 100, 500, 1000], true)
+    if (isUnderAlert && isNotificationsEnabled) Vibration.vibrate(ALERT_MODE_VIBRATION_PATTERN, true)
 
   }, [isUnderAlert, isNotificationsEnabled])
 
