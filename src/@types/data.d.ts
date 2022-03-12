@@ -1,7 +1,8 @@
 interface IEventType {
   id: number,
   icon: string,
-  text: string
+  text: string,
+  count?: number
 }
 
 interface IEvent {

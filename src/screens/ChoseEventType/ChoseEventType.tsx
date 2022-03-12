@@ -43,7 +43,7 @@ const ChoseEventType = ({ navigation }: ChoseEventTypePageProps) => {
               icon={e.icon}
               text={e.text}
               style={{margin: 6}}
-              eventCount={5}
+              eventCount={e.count}
               onPress={() => setSelectedCard(e)}
             />
           )))}
