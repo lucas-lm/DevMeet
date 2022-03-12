@@ -2,7 +2,7 @@ import styled from 'styled-components/native'
 
 export const EventPageRootContainer = styled.View`
   flex: 1;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   max-width: 320px;
   margin: 0 auto;
@@ -26,13 +26,8 @@ export const IconButton = styled.TouchableOpacity<{backgroundColor?: string}>`
   border-radius: 4px;
 `
 
-export const ScrollableContentContainer = styled.ScrollView.attrs(() => ({
-  contentContainerStyle: {
-    alignItems: 'center',
-  }
-}))`
+export const ScrollableContentContainer = styled.ScrollView`
   flex-grow: 0;
-  max-height: 70%;
 `
 
 export const SectionContainer = styled.View`

@@ -25,7 +25,8 @@
     "react-native-web": "0.17.1",
     "styled-components": "^5.3.3",
     "expo-clipboard": "~2.1.0",
-    "expo-av": "~10.2.0"
+    "expo-av": "~10.2.0",
+    "expo-constants": "~13.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

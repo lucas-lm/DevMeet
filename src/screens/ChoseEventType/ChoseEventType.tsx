@@ -11,7 +11,7 @@ type ChoseEventTypePageProps = NativeStackScreenProps<RootStackParamList, 'Chose
 const ChoseEventType = ({ navigation }: ChoseEventTypePageProps) => {
   const [isLoading, setIsLoading] = useState(true)
   const [eventTypes, setEventTypes] = useState<IEventType[]>([])
-  const [selectedCard, setSelectedCard] = useState<IEventType | null>(null)
+  const [selectedCard, setSelectedCard] = useState<IEventType>()
 
   useEffect(() => {
     ApiClient
@@ -35,7 +35,7 @@ const ChoseEventType = ({ navigation }: ChoseEventTypePageProps) => {
       </TextContainer>
       <CardsContainer>
           {isLoading ? (
-            <Paragraph>Loading</Paragraph>
+            <Paragraph size="32px">{'<Loading />'}</Paragraph>
           ) : ( eventTypes.map(e => (
             <EventTypeCard
               key={e.id}
@@ -49,18 +49,21 @@ const ChoseEventType = ({ navigation }: ChoseEventTypePageProps) => {
           )))}
       </CardsContainer>
 
-      {selectedCard && (
       <TextIconButton
         text="Próximo"
-        iconBackgroundColor="success"
+        iconBackgroundColor="main"
         textWeight="bold"
         textSize="16px"
-        style={{alignSelf: 'flex-end', marginTop: 24}}
-        onPress={() => navigation.navigate('AvailableEvents', { categoryId: selectedCard.id })}
+        style={{alignSelf: 'flex-end', marginTop: 24, opacity: selectedCard ? 1 : 0.1}}
+        disabled={!selectedCard}
+        onPress={() => navigation.navigate(
+            'AvailableEvents',
+            selectedCard ? { categoryId: selectedCard.id } : undefined
+          )}
         >
         <SvgIcon width='40px' height='40px' icon="arrow" color="contrast"/>
       </TextIconButton>
-      )}
+
     </PageRootContainer>
   )
 }

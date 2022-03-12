@@ -3,17 +3,12 @@ import { Title } from "../../shared/components";
 
 export const PageRootContainer = styled.View`
   flex: 1;
-  justify-content: center;
+  padding-top: 16px;
+  justify-content: flex-start;
   align-items: center;
   width: 90%;
   max-width: 328px;
   margin: 0 auto;
-`;
-
-export const HeaderTextContainer = styled.View`
-  max-width: 300px;
-  align-self: flex-start;
-  margin-bottom: 16px;
 `;
 
 export const EventCardsContainer = styled.ScrollView.attrs(() => ({
@@ -23,7 +18,7 @@ export const EventCardsContainer = styled.ScrollView.attrs(() => ({
   }
 }))`
   flex-grow: 0;
-  max-height: 400px;
+  /* max-height: 400px; */
 `;
 
 export const EventCard = styled.TouchableOpacity`

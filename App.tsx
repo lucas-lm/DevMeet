@@ -1,4 +1,5 @@
-import { View } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
+import Constants from 'expo-constants';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import { NavigationContainer, DefaultTheme as RNNavigationDefaultTheme } from '@react-navigation/native';
@@ -33,14 +34,21 @@ export default function App() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <NavigationContainer theme={RNNavTheme}>
-        <Stack.Navigator initialRouteName='Greeting' screenOptions={{headerShown: false}}>
-          <Stack.Screen name='Greeting' component={Greeting}/>
-          <Stack.Screen name='ChoseEventType' component={ChoseEventType}/>
-          <Stack.Screen name='AvailableEvents' component={AvailableEvents}/>
-          <Stack.Screen name='EventPage' component={EventPage}/>
-        </Stack.Navigator>
-      </NavigationContainer>
+      <SafeAreaView style={{
+          flex: 1,
+          paddingTop: Constants.statusBarHeight,
+          paddingBottom: 16,
+          backgroundColor: defaultTheme.palette.gray.background
+        }}>
+        <NavigationContainer theme={RNNavTheme}>
+          <Stack.Navigator initialRouteName='Greeting' screenOptions={{headerShown: false}}>
+            <Stack.Screen name='Greeting' component={Greeting}/>
+            <Stack.Screen name='ChoseEventType' component={ChoseEventType}/>
+            <Stack.Screen name='AvailableEvents' component={AvailableEvents}/>
+            <Stack.Screen name='EventPage' component={EventPage}/>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
       <StatusBar style="light" />
     </ThemeProvider>
   );

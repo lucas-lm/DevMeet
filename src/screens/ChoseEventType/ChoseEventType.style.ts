@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 export const PageRootContainer = styled.View`
   flex: 1;
-  justify-content: center;
+  justify-content: space-around;
   max-width: 320px;
   margin: 0 auto;
 `
@@ -20,5 +20,4 @@ export const CardsContainer = styled.ScrollView.attrs(() => ({
   }
 }))`
   flex-grow: 0;
-  max-height: 360px;
 `
