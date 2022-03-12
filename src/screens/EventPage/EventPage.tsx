@@ -98,7 +98,7 @@ const EventPage = ({ navigation, route }: EventPageProps) => {
           <DateHeaderBox>
             <Datetime
               datetime={event?.dataInicio as string}
-              size='32px' outputFormat='DD/MMM'
+              size='28px' outputFormat='DD/MMM/YYYY'
               style={{textTransform: 'uppercase'}}/>
             <Datetime
               datetime={event?.dataInicio as string}
