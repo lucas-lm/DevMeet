@@ -8,6 +8,7 @@ import { Datetime, Highlight, Paragraph, SvgIcon, TextIconButton, Timer, Title, 
 import { ApiClient } from "../../shared/services";
 import { View, Vibration, Alert } from 'react-native';
 import { useTheme } from 'styled-components';
+import { useIsFocused } from '@react-navigation/native';
 
 type EventPageProps = NativeStackScreenProps<RootStackParamList, 'EventPage'>
 
@@ -16,17 +17,31 @@ const PROGRESSBAR_MIN_VAL = 0.1
 const ALERT_MODE_LIFETIME = 30 // in seconds
 const ALERT_MODE_VIBRATION_PATTERN = [0, 500, 100, 500, 1000]
 
+const INITIAL_NOTIFICATION_ENABLED_STATE = false
+
+const ellipsis = (text?: string, n=16) => {
+  if (!text) return ''
+  return text.length < n ? text : text.slice(0, n) + '...'
+}
+
 const EventPage = ({ navigation, route }: EventPageProps) => {
   const { eventId } = route.params
   const theme = useTheme()
   const [event, setEvent] = useState<IEvent>()
   const [isLoadingEvent, setIsLoadingEvent] = useState(true)
   const [progress, setProgress] = useState(0)
-  const [isNotificationsEnabled, setIsNotificationsEnabled] = useState(false)
+  const [isNotificationsEnabled, setIsNotificationsEnabled] = useState(INITIAL_NOTIFICATION_ENABLED_STATE)
   const [isUnderAlert, setIsUnderAlert] = useState(false)
+  const isFocused = useIsFocused()
 
-  const launchEventPage = () => {
-    console.log('event page')
+  const launchEventPage = (title: string = 'Evento', uri?: string) => {
+    Vibration.cancel()
+    const titleMaxSize = 18
+    const parsedTitle = title.length < titleMaxSize ? title : title.slice(0, titleMaxSize) + '...'
+    navigation.navigate(
+      'EventWebView',
+      { title: parsedTitle, uri }
+    )
   }
 
   const updateProgress = (secondsLeft: number) => {
@@ -44,10 +59,10 @@ const EventPage = ({ navigation, route }: EventPageProps) => {
     const timeoutId = setTimeout(() => setIsUnderAlert(false), ALERT_MODE_LIFETIME*1000)
     Alert.alert(
       'O evento já começou!',
-      'O seu evento já está rolando! Não fique de fora, siga para a página do evento',
+      'Não fique de fora, siga para a página do evento',
       [
-        {onPress: () => dismissAlert(timeoutId), text: 'Dispensar'},
-        {onPress: () => dismissAlert(timeoutId), text: 'Ir para o evento', style: 'cancel'},
+        {onPress: () => dismissAlert(timeoutId), text: 'Dispensar', style: 'cancel'},
+        {onPress: () => launchEventPage(event?.titulo, event?.link), text: 'Ir para o evento'},
       ],
       {
         cancelable: true,
@@ -66,8 +81,8 @@ const EventPage = ({ navigation, route }: EventPageProps) => {
   }, [eventId])
 
   useEffect(() => {
-    if (!isUnderAlert) Vibration.cancel()
     if (isUnderAlert && isNotificationsEnabled) Vibration.vibrate(ALERT_MODE_VIBRATION_PATTERN, true)
+    if (!isUnderAlert) Vibration.cancel()
   }, [isUnderAlert, isNotificationsEnabled])
 
   useEffect(() => {
@@ -114,7 +129,7 @@ const EventPage = ({ navigation, route }: EventPageProps) => {
             <Title size='24px'>Link do evento</Title>
             <LinkActionBar>
               <Paragraph size='20px' style={{fontFamily: 'Rajdhani'}}>
-                {event?.link}
+                {ellipsis(event?.link)}
               </Paragraph>
               <View style={{flexDirection: 'row'}}>
                 <IconButton onPress={() => setString(event?.link as string)}>
@@ -134,7 +149,7 @@ const EventPage = ({ navigation, route }: EventPageProps) => {
 
                 <IconButton
                   backgroundColor={theme.palette.semantic.success + '80'}
-                  onPress={launchEventPage}
+                  onPress={() => launchEventPage(event?.titulo, event?.link)}
                   >
                   <MaterialIcons name='arrow-forward' size={20} color={theme.palette.primary.contrast1} />
                 </IconButton>
@@ -156,7 +171,7 @@ const EventPage = ({ navigation, route }: EventPageProps) => {
               to={event?.dataInicio as string}
               size={32}
               onSecondsChange={updateProgress}
-              onTimesUp={handleTimerTimesUp}
+              onTimesUp={isFocused ? handleTimerTimesUp : undefined}
             >
               <Title>O evento já está rolando! 🎉🎉🎉</Title>
             </Timer>
@@ -172,4 +187,5 @@ const EventPage = ({ navigation, route }: EventPageProps) => {
     </EventPageRootContainer>
   )
 }
+
 export default EventPage
