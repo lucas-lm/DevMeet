@@ -61,7 +61,7 @@ const AvailableEvents = ({ navigation, route }: AvailableEventsPageProps) => {
                   style={{textTransform: 'uppercase'}}
                 /> - <Datetime datetime={evt.dataInicio} outputFormat="HH:mm"/>
               </Text>
-              <EventCardTitle>{evt.titulo}</EventCardTitle>
+              <EventCardTitle numberOfLines={2}>{evt.titulo}</EventCardTitle>
               <Paragraph size="10px" numberOfLines={3}>{evt.descricao}</Paragraph>
               <CardFooter>
                 <Paragraph size="8px">
