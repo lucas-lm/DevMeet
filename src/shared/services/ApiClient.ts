@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'https://raw.githubusercontent.com/Ballerini-Server/dev-meet-backend/main'
+const BASE_URL = 'https://raw.githubusercontent.com/lucas-lm/dev-meet-fake-backend/main'
 
 const getOffsetISODate = (m: number) => {
   const now = new Date()
