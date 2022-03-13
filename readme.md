@@ -1,4 +1,4 @@
-  ![banner](assets/icon.png)
+  ![banner](docs/banner.png)
 
 # DevMeet
 
