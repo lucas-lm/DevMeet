@@ -20,6 +20,13 @@
 
   In Event's screen you can also copy/open the link and subscribe to get a notification when it starts (Vibration + Alert).
 
+  Checkout the demo video
+  
+  <div align="center">
+    <video src="https://user-images.githubusercontent.com/29049644/158067372-bd9479b4-f9fe-4c9d-9980-4ff9ed5b97c4.mp4" />
+  </div>
+
+
 
 ## :computer: Techs
 
